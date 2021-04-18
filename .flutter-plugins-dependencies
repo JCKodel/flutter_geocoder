@@ -1,1 +1,0 @@
-{"info":"This is a generated file; do not edit or check into version control.","plugins":{"ios":[],"android":[{"name":"geocoder","path":"C:\\\\temp\\\\flutter_geocoder\\\\","dependencies":[]}],"macos":[],"linux":[],"windows":[],"web":[]},"dependencyGraph":[{"name":"geocoder","dependencies":[]}],"date_created":"2021-03-09 22:06:22.342462","version":"2.0.1"}

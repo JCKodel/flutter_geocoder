@@ -17,8 +17,12 @@ class GoogleGeocoding implements Geocoding {
 
   GoogleGeocoding(this.apiKey, {this.language}) : _httpClient = HttpClient();
 
-  Future<List<Address>> findAddressesFromCoordinates(Coordinates coordinates) async {
-    final url = '$_host?key=$apiKey${language != null ? '&language=' + language! : ''}&latlng=${coordinates.latitude},${coordinates.longitude}';
+  Future<List<Address>> findAddressesFromCoordinates(
+      Coordinates coordinates) async {
+    String languageArgument = language == null ? '' : '&language=' + language!;
+
+    final url =
+        '$_host?key=$apiKey$languageArgument&latlng=${coordinates.latitude},${coordinates.longitude}';
     return _send(url);
   }
 
@@ -41,7 +45,10 @@ class GoogleGeocoding implements Geocoding {
 
     if (results == null) return [];
 
-    return results.map(_convertAddress).map<Address>((map) => Address.fromMap(map)).toList();
+    return results
+        .map(_convertAddress)
+        .map<Address>((map) => Address.fromMap(map))
+        .toList();
   }
 
   Map? _convertCoordinates(dynamic geometry) {
@@ -84,7 +91,8 @@ class GoogleGeocoding implements Geocoding {
         result["adminArea"] = item["long_name"];
       } else if (types.contains("administrative_area_level_2")) {
         result["subAdminArea"] = item["long_name"];
-      } else if (types.contains("sublocality") || types.contains("sublocality_level_1")) {
+      } else if (types.contains("sublocality") ||
+          types.contains("sublocality_level_1")) {
         result["subLocality"] = item["long_name"];
       } else if (types.contains("premise")) {
         result["featureName"] = item["long_name"];
