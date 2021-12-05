@@ -12,8 +12,8 @@ class Coordinates {
 
   /// Creates coordinates from a map containing its properties.
   Coordinates.fromMap(Map map)
-      : this.latitude = map["latitude"],
-        this.longitude = map["longitude"];
+      : this.latitude = map["latitude"]?.toDouble(),
+        this.longitude = map["longitude"]?.toDouble();
 
   /// Creates a map from the coordinates properties.
   Map toMap() => {
